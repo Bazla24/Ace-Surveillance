@@ -1,21 +1,17 @@
-# Use the Python 3.9 base image
+# Base image
 FROM python:3.9
 
-# Copy the entire project into the Docker image
-COPY . /app
-
-# Set the working directory to the project directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Install dependencies for each feature
-RUN pip install -r crowd_analysis/requirements.txt
-RUN pip install -r queue_management/requirements.txt
-RUN pip install -r parking_analysis/requirements.txt
-RUN pip install -r anomaly_detection/requirements.txt
-RUN pip install -r heatmap/requirements.txt
+# Copy the necessary files to the working directory
+COPY . /app
 
-# Expose any necessary ports
-EXPOSE 8000
+# Install the required Python dependencies
+RUN pip install -r requirements.txt
 
-# Define the startup command for each feature
-CMD ["python", "crowd_analysis/main.py"]
+# Expose the desired port for your application
+EXPOSE 80
+
+# Specify the command to run your application
+CMD ["python", "login.py"]
