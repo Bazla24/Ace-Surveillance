@@ -6,64 +6,39 @@ pipeline {
     }
 
     stages {
-        stage('Cloning Apache Airflow repo the repo') {
+        stage('Cloning Apache Airflow repo') {
             steps {
                 git branch: 'main', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
-                // print all the files in the repo and use bat
-                bat 'dir'
+                bat 'echo "Apache Airflow Version:"'
+                bat 'airflow version'
             }
         }
 
-        // add a stage cloning dvc repo
         stage('Cloning DVC repo') {
             steps {
-            
                 dir('examples/intro-example/dags') {
-                    // clone the dvc repo
                     git branch: 'main', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
-                    // print all the files in the repo and use bat
-                    
-
-                    // go in dvc folder and print all the files
-                    dir('dvc') {
-                        bat 'dir'
-                    }
-                        
-                        // run command dvc pull
-                    //     bat 'dvc pull'
-                    //     dir ('data') {
-                    //         bat 'dir'
-                    //     }
-                    // }
+                    bat 'echo "DVC Version:"'
+                    bat 'dvc --version'
                 }
-
             }
         }
-        
 
-        // cloning mlFlow branch in examples/intro-example/dags
         stage('Cloning mlFlow repo') {
             steps {
                 dir('examples/intro-example/dags/models') {
-                    // clone the dvc repo
                     git branch: 'main', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
-                    // print all the files in the repo and use bat
-                    bat 'dir'
+                    bat 'echo "mlFlow Version:"'
+                    bat 'mlflow --version'
                 }
             }
         }
 
         stage('Running Airflow') {
             steps {
-                // print all the files in the repo and use bat
+                bat 'echo "Running Airflow..."'
                 bat 'docker-compose up -d'
             }
         }
-        
-
-        
-
-        
-
     }
 }
