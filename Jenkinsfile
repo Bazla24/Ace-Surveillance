@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Cloning Apache Airflow repo the repo') {
             steps {
-                git branch: 'ApacheAirflowPipelinw', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
+                git branch: 'main', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
                 // print all the files in the repo and use bat
                 bat 'dir'
             }
@@ -20,7 +20,7 @@ pipeline {
             
                 dir('examples/intro-example/dags') {
                     // clone the dvc repo
-                    git branch: 'DVC', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
+                    git branch: 'main', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
                     // print all the files in the repo and use bat
                     
 
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 dir('examples/intro-example/dags/models') {
                     // clone the dvc repo
-                    git branch: 'mlFlow', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
+                    git branch: 'main', url: 'https://github.com/Bazla24/Ace-Surveillance.git'
                     // print all the files in the repo and use bat
                     bat 'dir'
                 }
